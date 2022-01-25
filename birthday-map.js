@@ -13,33 +13,6 @@ function countWords(string) {
 }
 
 // task 8
-const array = [
-  {
-    name: 'Ergo',
-    birthday: '2008-01-27',
-  },
-  {
-    name: 'Vasya',
-    birthday: '1998-02-12',
-  },
-  {
-    name: 'Oleg',
-    birthday: '2005-03-15',
-  },
-  {
-    name: 'Nick',
-    birthday: '2002-02-23',
-  },
-  {
-    name: 'John',
-    birthday: '2001-12-27',
-  },
-  {
-    name: 'Angelo',
-    birthday: '2007-01-03',
-  },
-]
-
 let months = [
   'Январь',
   'Февраль',
@@ -55,34 +28,40 @@ let months = [
   'Декабрь',
 ]
 
-render(array, 2)
+const array = []
+const args = process.argv.slice(2)
+const csv = require('csv-parser')
+const fs = require('fs')
+
+fs.createReadStream(args[0])
+  .pipe(csv())
+  .on('data', (data) => array.push(data))
+  .on('end', () => {
+    render(array, args[1])
+  })
 
 function render(workers, horizon) {
   const map = sortWorkers(workers)
   const currentDate = new Date()
-  const currentYear = currentDate.getFullYear()
-  const currentMonth = currentDate.getMonth()
+  let currentYear = currentDate.getFullYear()
+  const currentMonth = 11
   let result = ''
 
-  for (let i = currentMonth; i <= currentMonth + horizon; i++) {
-    if (map.has(i)) {
-      let workersArray = map.get(i)
-      result += renderMonth(i, currentYear)
+  for (let i = 0; i < horizon; i++) {
+    let month = (currentMonth + i) % 12
+    let year = currentYear
+
+    if (currentMonth + i > 11) {
+      year++
+    }
+
+    if (map.has(month)) {
+      let workersArray = map.get(month)
+      result += renderMonth(month, year)
 
       for (let j = 0; j < workersArray.length; j++) {
-        result += renderWorker(workersArray[j], currentYear)
+        result += renderWorker(workersArray[j], year)
       }
-    } else if (i === 12) {
-      for (i = 0; i < horizon; i++) {
-        workersArray = map.get(i)
-        result += renderMonth(i, currentYear + 1)
-
-        for (let k = 0; k < workersArray.length; k++) {
-          result += renderWorker(workersArray[k], currentYear + 1)
-        }
-      }
-
-      break
     }
   }
 
