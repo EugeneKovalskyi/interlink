@@ -1,63 +1,42 @@
-#!/usr/bin/env node
+const readline = require('readline')
+const { stdin: input, stdout: output } = process
+const rl = readline.createInterface({ input, output })
 
-const net = require('net')
-
-// массив игроков
-const players = []
-// игровое поле
+// тестовое поле
 let gameField = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 // глобальная переменная для хранения статуса игры
 let status = gameStatus(gameField)
 // крестики ходят первые
-let flag = 1
+let player = 1
 
-const server = net.createServer((socket) => {
-  const port = socket.remotePort
+// отрисовка пустого поля
+console.log(renderField(gameField))
+console.log(` ${player === 1 ? 'x' : '0'}: Enter coordinate from 1 to 9 -->`)
 
-  // отрисовка пустого поля
-  // (renderField(gameField))
-  // (` ${flag === 1 ? 'x' : '0'}: Enter coordinate from 1 to 9 -->`)
-
-  // pipe
-  socket.pipe(process.stdout)
-
-  players.push(socket)
-
-  // data
-  socket.on('data', (data) => {
-    let answer = data.toString()
-    consoleRender(answer, socket)
-  })
-
-  // close
-  socket.on('close', () => {
-    let index = players.indexOf(socket)
-    players.splice(index, 1)
-    console.log('Closed: ', port)
-  })
-})
-
-server.listen(1337, '0.0.0.0')
+// слушатель ввода
+rl.on('line', consoleRender)
 
 // вывод текущего результата в консоль
-function consoleRender(answer, player) {
+function consoleRender(answer) {
   let index = answer - 1
 
   if (!gameField[index]) {
     // вносим изменения в массив gameField
-    makeTurn(gameField, flag, index)
+    makeTurn(gameField, player, index)
 
     console.log(renderField(gameField))
 
     // смена игрока
-    flag = -flag
+    player = -player
 
-    player.write(
-      `${player === 1 ? 'x' : '0'}: Enter coordinate from 1 to 9 -->`
+    rl.setPrompt(
+      ` ${player === 1 ? 'x' : '0'}: Enter coordinate from 1 to 9 -->`
     )
   } else {
-    player.write(' Try another number --> ')
+    rl.setPrompt(' Try another number --> ')
   }
+
+  rl.prompt()
 
   status = gameStatus(gameField)
 
@@ -65,17 +44,17 @@ function consoleRender(answer, player) {
   switch (status) {
     case 'end':
       console.log(' Dead heat!')
-      player.close()
+      rl.close()
       break
 
     case 'x':
       console.log(' x won!')
-      player.close()
+      rl.close()
       break
 
     case '0':
       console.log(' 0 won!')
-      player.close()
+      rl.close()
       break
   }
 }
