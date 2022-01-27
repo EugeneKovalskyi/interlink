@@ -9,24 +9,42 @@ let gameField = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 // глобальная переменная для хранения статуса игры
 let status = gameStatus(gameField)
 // крестики ходят первые
-let flag = 1
+let currentPlayerMarker = 1
 
 const server = net.createServer((socket) => {
+  // const [p1, p2] = currentPlayerMarker === 1 ? players : players.reverse()
   const port = socket.remotePort
-
-  // отрисовка пустого поля
-  // (renderField(gameField))
-  // (` ${flag === 1 ? 'x' : '0'}: Enter coordinate from 1 to 9 -->`)
 
   // pipe
   socket.pipe(process.stdout)
 
   players.push(socket)
 
+  // отрисовка пустого поля
+  if (players.length === 2) {
+    for (let i = 0; i < players.length; i++) {
+      players[i].write(renderField(gameField))
+    }
+
+    players[0].write('Enter coordinate from 1 to 9\n')
+    players[1].write('Wait for the another player to make a turn...\n')
+  } else {
+    players[0].write('Please wait for second player...\n')
+  }
+
   // data
   socket.on('data', (data) => {
     let answer = data.toString()
-    consoleRender(answer, socket)
+
+    if (currentPlayerMarker === 1 && players[0] === socket && answer < 10) {
+      consoleRender(answer, players[0])
+    } else if (
+      currentPlayerMarker === -1 &&
+      players[1] === socket &&
+      answer < 10
+    ) {
+      consoleRender(answer, players[1])
+    }
   })
 
   // close
@@ -37,46 +55,49 @@ const server = net.createServer((socket) => {
   })
 })
 
-server.listen(1337, '0.0.0.0')
+server.listen(1337, '10.177.1.11')
 
 // вывод текущего результата в консоль
-function consoleRender(answer, player) {
+function consoleRender(answer, currentPlayer) {
   let index = answer - 1
 
   if (!gameField[index]) {
     // вносим изменения в массив gameField
-    makeTurn(gameField, flag, index)
+    makeTurn(gameField, currentPlayerMarker, index)
 
-    console.log(renderField(gameField))
+    for (let player of players) {
+      player.write(renderField(gameField))
+    }
+
+    status = gameStatus(gameField)
+
+    // проверка на перемогу
+    switch (status) {
+      case 'end':
+        sendAll(' message!')
+        return
+
+      case 'x':
+        sendAll(' x won!')
+        return
+
+      case '0':
+        sendAll(' 0 won!')
+        return
+    }
 
     // смена игрока
-    flag = -flag
+    currentPlayerMarker = -currentPlayerMarker
 
-    player.write(
-      `${player === 1 ? 'x' : '0'}: Enter coordinate from 1 to 9 -->`
-    )
+    if (currentPlayerMarker === 1) {
+      players[0].write('Enter coordinate from 1 to 9\n')
+      players[1].write('Wait for the another player to make a turn...\n')
+    } else {
+      players[1].write('Enter coordinate from 1 to 9\n')
+      players[0].write('Wait for the another player to make a turn...\n')
+    }
   } else {
-    player.write(' Try another number --> ')
-  }
-
-  status = gameStatus(gameField)
-
-  // проверка на перемогу
-  switch (status) {
-    case 'end':
-      console.log(' Dead heat!')
-      player.close()
-      break
-
-    case 'x':
-      console.log(' x won!')
-      player.close()
-      break
-
-    case '0':
-      console.log(' 0 won!')
-      player.close()
-      break
+    currentPlayer.write('Try another number!\n')
   }
 }
 
@@ -102,7 +123,7 @@ function renderField(field) {
   }
 
   // вид поля
-  output = ` ${fieldSymbols[0]} | ${fieldSymbols[1]} | ${fieldSymbols[2]}\n${horizontalLine}\n ${fieldSymbols[3]} | ${fieldSymbols[4]} | ${fieldSymbols[5]}\n${horizontalLine}\n ${fieldSymbols[6]} | ${fieldSymbols[7]} | ${fieldSymbols[8]}\n`
+  output = ` ${fieldSymbols[0]} | ${fieldSymbols[1]} | ${fieldSymbols[2]}\n${horizontalLine}\n ${fieldSymbols[3]} | ${fieldSymbols[4]} | ${fieldSymbols[5]}\n${horizontalLine}\n ${fieldSymbols[6]} | ${fieldSymbols[7]} | ${fieldSymbols[8]}\n\n\n`
 
   return output
 }
@@ -137,11 +158,15 @@ function gameStatus(field) {
 }
 
 // выполнить ход
-function makeTurn(field, player, index) {
+function makeTurn(field, currentPlayer, index) {
   if (!field[index]) {
-    field[index] = player
+    field[index] = currentPlayer
     return true
   }
 
   return false
+}
+
+function sendAll(message) {
+  players.forEach((player) => player.write(message))
 }
