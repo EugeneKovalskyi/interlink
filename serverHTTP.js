@@ -1,42 +1,7 @@
-// const http = require('http')
-// const port = 3000
-// const tasks = [{ name: 'Get tasks' }, { name: 'Create task' }]
-// // server
-// const server = http.createServer((req, res) => {})
-
-// server.on('request', (req, res) => {
-//   logRequest(req)
-
-//   if (req.url === '/tasks') {
-//     if (req.method === 'GET') {
-//       res.writeHead(200, { 'Content-Type': 'application/json' })
-//       res.end(JSON.stringify(tasks) + '\n')
-//     } else if (req.method === 'POST') {
-//       const data = []
-
-//       req.on('data', (chunk) => data.push(chunk))
-//       req.on('end', () => {
-//         const task = JSON.parse(data.join(' '))
-
-//         tasks.push(task)
-
-//         res.writeHead(201, { 'Content-Type': 'application/json' })
-//         res.end(JSON.stringify(tasks) + '\n')
-//       })
-//     } else {
-//       res.writeHead(404, 'Not Found')
-//       res.end(JSON.stringify(tasks) + '\n')
-//     }
-//   } else {
-//     res.writeHead(404, 'Not Found')
-//     res.end(JSON.stringify(tasks) + '\n')
-//   }
-// })
-
-// server.listen(port, () => console.log('Server started ', port))
-
 const http = require('http')
+
 const port = 3000
+
 const server = http.createServer((req, res) => {
   logRequest(req)
 
@@ -73,9 +38,19 @@ const server = http.createServer((req, res) => {
         let uniqueWordsCounter = 0
         let mostOfenWord = ''
 
-        // for (let key of obj) {
+        for (let key in wordsObj) {
+          if (wordsObj[key] === 1) {
+            uniqueWordsCounter++
+          }
 
-        // }
+          if (mostOfenWord) {
+            if (wordsObj[mostOfenWord] < wordsObj[key]) {
+              mostOfenWord = key
+            }
+          } else {
+            mostOfenWord = key
+          }
+        }
 
         res.writeHead(201, { 'Content-Type': 'application/json' })
       })
