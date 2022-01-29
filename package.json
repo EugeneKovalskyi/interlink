@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "start": "nodemon todo.js"
+    "start": "nodemon week1/server.js"
   },
   "name": "interlink",
   "version": "1.0.0",
