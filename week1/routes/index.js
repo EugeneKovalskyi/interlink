@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const tasks = require('./tasks')
+const lists = require('./lists')
 
-router.use('/api/tasks', tasks)
+router.use('/api/lists', lists)
 
 module.exports = router
