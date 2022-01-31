@@ -45,6 +45,18 @@ class ListController {
     return taskToUpdate
   }
 
+  replaceById(listId, taskId, task) {
+    const title = task.title
+    const done = task.done
+    const replacedTask = List[listId - 1][taskId - 1]
+
+    replacedTask.title = title
+    replacedTask.done = done
+    replacedTask.id = taskId
+
+    return replacedTask
+  }
+
   removeListById(listId) {
     List.splice(listId - 1, 1)
     return List

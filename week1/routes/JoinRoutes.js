@@ -110,6 +110,31 @@ function JoinRoutes(router, controller) {
       }
     })
 
+    router.put('/', middleware, (req, res) => {
+      try {
+        const tasksUrl = new URL('http://localhost:3000' + req.url)
+        const listId = tasksUrl.searchParams.get('listId')
+        const taskId = tasksUrl.searchParams.get('taskId')
+        const models = controller.replaceById(listId, taskId, req.body)
+
+        res.json(models)
+      } catch (error) {
+        res.status(500).json({ error })
+      }
+    })
+
+    router.put('/:listId/tasks/:taskId', middleware, (req, res) => {
+      try {
+        const listId = parseInt(req.params.listId)
+        const taskId = parseInt(req.params.taskId)
+        const models = controller.replaceById(listId, taskId, req.body)
+
+        res.json(models)
+      } catch (error) {
+        res.status(500).json({ error })
+      }
+    })
+
     router.delete('/', middleware, (req, res) => {
       try {
         const tasksUrl = new URL('http://localhost:3000' + req.url)

@@ -1,18 +1,3 @@
-// task 7
-let string = 'some long string some short string some color of my home'
-
-function countWords(string) {
-  let obj = {}
-  let wordArray = string.split(' ')
-
-  for (let word of wordArray) {
-    obj[word] ? ++obj[word] : (obj[word] = 1)
-  }
-
-  return obj
-}
-
-// task 8
 let months = [
   'Январь',
   'Февраль',

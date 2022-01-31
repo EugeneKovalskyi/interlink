@@ -1,4 +1,4 @@
-// task 1
+// pluralism
 function pluralism(num, one, few, many) {
   if ((num % 10 === 1 && num < 5) || (num % 10 === 1 && num > 20)) {
     return `${num} ${one}`
@@ -9,19 +9,19 @@ function pluralism(num, one, few, many) {
   } else return `${num} ${many}`
 }
 
-// task 2
+// summ
 function sum(...params) {
   return params.reduce((sum, curr) =>
     Number.isInteger(curr) ? sum + curr : sum
   )
 }
 
-// task 3
+// factorial
 function factorial(num) {
   return num > 1 ? num * factorial(--num) : num
 }
 
-// task 4
+// printTask
 function printTask(index, { title, done, desc, dueDate }) {
   return console.log(
     `${index}. [${done ? 'x' : ' '}] ${title} ${
@@ -36,7 +36,7 @@ function printTask(index, { title, done, desc, dueDate }) {
   )
 }
 
-// task 5
+// class Task
 class Task {
   constructor(obj) {
     if (typeof obj === 'object') {
@@ -78,4 +78,18 @@ class Task {
         : ''
     }${this.desc ? '\n   ' + this.desc : ''}`
   }
+}
+
+// Wordscounter
+let string = 'some long string some short string some color of my home'
+
+function countWords(string) {
+  let obj = {}
+  let wordArray = string.split(' ')
+
+  for (let word of wordArray) {
+    obj[word] ? ++obj[word] : (obj[word] = 1)
+  }
+
+  return obj
 }
