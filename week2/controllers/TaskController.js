@@ -43,9 +43,15 @@ class TaskController {
   }
 
   async dashboard(req, res) {
+    const currentDate = new Date()
+      .toLocaleDateString()
+      .split('.')
+      .reverse()
+      .join('-')
+
     const tasks = await db.query(
-      'SELECT COUNT(due_date) FROM todos WHERE due_date BETWEEN $1 AND $2',
-      []
+      'SELECT COUNT(due_date) FROM todos WHERE due_date=$1',
+      [currentDate]
     )
   }
 }
