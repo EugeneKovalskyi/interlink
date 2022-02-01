@@ -1,5 +1,3 @@
-const express = require('express')
-
 function GeneralRoutes(router, controller) {
   const self = {
     read,
