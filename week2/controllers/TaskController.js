@@ -41,6 +41,13 @@ class TaskController {
 
     res.status(204).json('OK')
   }
+
+  async dashboard(req, res) {
+    const tasks = await db.query(
+      'SELECT COUNT(due_date) FROM todos WHERE due_date BETWEEN $1 AND $2',
+      []
+    )
+  }
 }
 
 module.exports = new TaskController()
