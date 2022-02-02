@@ -2,22 +2,24 @@ const db = require('../todolistDB')
 
 class TaskController {
   async find(req, res) {
-    const table = await db.query('SELECT * FROM todos')
+    const table = await db.query('SELECT * FROM tasks')
 
     res.json(table.rows)
   }
 
   async findById(req, res) {
     const id = req.params.id
-    const task = await db.query('SELECT * FROM todos WHERE id=$1', [id])
+    const task = await db.query('SELECT (due_date) FROM tasks WHERE id=$1', [
+      id,
+    ])
 
-    res.json(task.rows)
+    res.json(task.rows[0].due_date)
   }
 
   async create(req, res) {
     const { title } = req.body
     const task = await db.query(
-      'INSERT INTO todos (title, done) values ($1, false) RETURNING *',
+      'INSERT INTO tasks (title, done) values ($1, false) RETURNING *',
       [title]
     )
 
@@ -26,10 +28,19 @@ class TaskController {
 
   async update(req, res) {
     const id = req.params.id
-    const { title, done } = req.body
+    const originalValues = await db.query('SELECT * FROM tasks WHERE id=$1', [
+      id,
+    ])
+
+    let { title, done, due_date } = req.body
+
+    if (title === undefined) title = originalValues.rows[0].title
+    if (done === undefined) done = originalValues.rows[0].done
+    if (due_date === undefined) due_date = originalValues.rows[0].due_date
+
     const task = await db.query(
-      'UPDATE todos SET title=$1, done=$2 WHERE id=$3 RETURNING *',
-      [title, done, id]
+      'UPDATE tasks SET title=$1, done=$2, due_date=$3 WHERE id=$4 RETURNING *',
+      [title, done, due_date, id]
     )
 
     res.json(task.rows)
@@ -37,22 +48,9 @@ class TaskController {
 
   async remove(req, res) {
     const id = req.params.id
-    const task = await db.query('DELETE FROM todos WHERE id=$1', [id])
+    const task = await db.query('DELETE FROM tasks WHERE id=$1', [id])
 
     res.status(204).json('OK')
-  }
-
-  async dashboard(req, res) {
-    const currentDate = new Date()
-      .toLocaleDateString()
-      .split('.')
-      .reverse()
-      .join('-')
-
-    const tasks = await db.query(
-      'SELECT COUNT(due_date) FROM todos WHERE due_date=$1',
-      [currentDate]
-    )
   }
 }
 

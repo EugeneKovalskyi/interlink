@@ -2,9 +2,9 @@ const router = require('express').Router()
 const controller = require('../controllers/ListController')
 const GeneralRoutes = require('./GeneralRoutes')
 
-GeneralRoutes(router, controller).crud(logRequest)
+GeneralRoutes(router, controller).crud()
 
-router.get('/:listId', logRequest, (req, res) => {
+router.get('/:listId', (req, res) => {
   try {
     const listId = parseInt(req.params.listId)
     const models = controller.findListById(listId)
@@ -15,7 +15,7 @@ router.get('/:listId', logRequest, (req, res) => {
   }
 })
 
-router.get('/:listId/tasks/:id', logRequest, (req, res) => {
+router.get('/:listId/tasks/:id', (req, res) => {
   try {
     const listId = parseInt(req.params.listId)
     const id = parseInt(req.params.id)
@@ -27,7 +27,7 @@ router.get('/:listId/tasks/:id', logRequest, (req, res) => {
   }
 })
 
-router.post('/:listId', logRequest, (req, res) => {
+router.post('/:listId', (req, res) => {
   try {
     const listId = parseInt(req.params.listId)
     const models = controller.createTask(listId, req.body)
@@ -38,7 +38,7 @@ router.post('/:listId', logRequest, (req, res) => {
   }
 })
 
-router.patch('/:listId/tasks/:id', logRequest, (req, res) => {
+router.patch('/:listId/tasks/:id', (req, res) => {
   try {
     const listId = parseInt(req.params.listId)
     const id = parseInt(req.params.id)
@@ -50,7 +50,7 @@ router.patch('/:listId/tasks/:id', logRequest, (req, res) => {
   }
 })
 
-router.put('/:listId/tasks/:id', logRequest, (req, res) => {
+router.put('/:listId/tasks/:id', (req, res) => {
   try {
     const listId = parseInt(req.params.listId)
     const id = parseInt(req.params.id)
@@ -62,7 +62,7 @@ router.put('/:listId/tasks/:id', logRequest, (req, res) => {
   }
 })
 
-router.delete('/:listId', logRequest, (req, res) => {
+router.delete('/:listId', (req, res) => {
   try {
     const listId = parseInt(req.params.listId)
     const models = controller.removeListById(listId)
@@ -73,7 +73,7 @@ router.delete('/:listId', logRequest, (req, res) => {
   }
 })
 
-router.delete('/:listId/tasks/:id', logRequest, (req, res) => {
+router.delete('/:listId/tasks/:id', (req, res) => {
   try {
     const listId = parseInt(req.params.listId)
     const id = parseInt(req.params.id)
@@ -84,10 +84,5 @@ router.delete('/:listId/tasks/:id', logRequest, (req, res) => {
     res.status(500).json({ error })
   }
 })
-
-function logRequest({ method, url }, res, next) {
-  console.log(`[${new Date().toISOString()}] ${method} ${url}`)
-  next()
-}
 
 module.exports = router

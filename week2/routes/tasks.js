@@ -11,6 +11,4 @@ router.patch('/:id', controller.update)
 
 router.delete('/:id', controller.remove)
 
-router.get('/dashboard', controller.dashboard)
-
 module.exports = router
