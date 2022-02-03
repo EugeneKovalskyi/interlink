@@ -1,5 +1,8 @@
 const router = require('express').Router({ mergeParams: true })
-const controller = require('../controllers/TaskController')
+const toggleKNEX = require('../toggleKNEX')
+const controller = require(`../controllers/TaskController${
+  toggleKNEX ? 'KNEX' : ''
+}`)
 
 router.get('/', controller.find)
 
