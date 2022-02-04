@@ -1,9 +1,8 @@
 const knex = require('../todolistKNEX')
 
-class DashboardController {
-  async getDashboard(req, res) {
+class DashboardKNEX {
+  async getDashboard() {
     const currentDate = new Date()
-
     const todaysTasksAmount = await knex('tasks')
       .count('title')
       .where('due_date', currentDate)
@@ -18,15 +17,8 @@ class DashboardController {
       .groupBy('lists.id')
       .orderBy('lists.id')
 
-    for (let list of dashboard) {
-      list.pending_tasks_amount = +list.pending_tasks_amount
-    }
-
-    res.json({
-      todaysTasksAmount: +todaysTasksAmount[0].count,
-      dashboard,
-    })
+    return { todaysTasksAmount, dashboard }
   }
 }
 
-module.exports = new DashboardController()
+module.exports = new DashboardKNEX()

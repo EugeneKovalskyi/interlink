@@ -1,26 +1,22 @@
-const db = require('../todolistDB')
+const toggleKNEX = require('../toggleKNEX')
+const Dashboard = require(`../models/Dashboard${toggleKNEX ? 'KNEX' : ''}`)
 
 class DashboardController {
-  async getDashboard(req, res) {
-    const currentDate = new Date()
+  getDashboard(req, res) {
+    Dashboard.getDashboard()
+      .then((result) => {
+        result.todaysTasksAmount = +result.todaysTasksAmount[0].count
 
-    const todaysTasksAmount = await db.query(
-      'SELECT COUNT(title) FROM tasks WHERE due_date=$1',
-      [currentDate]
-    )
+        for (let list of result.dashboard) {
+          list.pending_tasks_amount = +list.pending_tasks_amount
+        }
 
-    const dashboard = await db.query(
-      'SELECT lists.title, lists.id, COUNT(tasks.done) AS pending_tasks_amount FROM lists LEFT JOIN tasks ON tasks.list_id = lists.id AND tasks.done=false GROUP BY lists.id ORDER BY lists.id ASC'
-    )
-
-    for (let list of dashboard.rows) {
-      list.pending_tasks_amount = +list.pending_tasks_amount
-    }
-
-    res.json({
-      todaysTasksAmount: +todaysTasksAmount.rows[0].count,
-      dashboard: dashboard.rows,
-    })
+        res.json(result)
+      })
+      .catch((error) => {
+        console.error(error)
+        res.status(500).json(error)
+      })
   }
 }
 

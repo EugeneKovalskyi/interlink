@@ -1,8 +1,5 @@
 const router = require('express').Router({ mergeParams: true })
-const toggleKNEX = require('../toggleKNEX')
-const controller = require(`../controllers/CollectionController${
-  toggleKNEX ? 'KNEX' : ''
-}`)
+const controller = require('../controllers/CollectionController')
 
 router.get('/today', controller.getCollectionToday)
 

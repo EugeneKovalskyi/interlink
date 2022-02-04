@@ -1,8 +1,5 @@
 const router = require('express').Router({ mergeParams: true })
-const toggleKNEX = require('../toggleKNEX')
-const controller = require(`../controllers/DashboardController${
-  toggleKNEX ? 'KNEX' : ''
-}`)
+const controller = require('../controllers/DashboardController')
 
 router.get('/', controller.getDashboard)
 
