@@ -3,8 +3,8 @@ const knex = require('../todolistKNEX')
 class TaskKNEX {
   async find(list_id, isAll) {
     const tasks = knex('tasks').where('list_id', list_id)
-    if (isAll) return await tasks
-    return await tasks.where('done', false)
+
+    return await (isAll ? tasks : tasks.where('done', false))
   }
 
   async findById(id) {
