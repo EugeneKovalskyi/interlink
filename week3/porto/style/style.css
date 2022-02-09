@@ -1,0 +1,27 @@
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&display=swap');
+
+/* dafault settings */
+@import url('default.css');
+
+/* main */
+@import url('header.css');
+
+/* about */
+@import url('about.css');
+
+/* skills */
+@import url('skills.css');
+
+/* portfolio */
+@import url('portfolio.css');
+
+@import url('footer.css');
+
+/*
+background 1 :  #fff
+background 2 :  #fffaf2
+text :          #333
+primary light : #f5d6ab
+primary :       #c66c49
+*/

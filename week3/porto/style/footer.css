@@ -1,0 +1,34 @@
+.footer {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.footer-lists {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+
+.footer-lists ul {
+  margin-top: 6px;
+  list-style-type: none;
+  flex: 50%;
+}
+
+.footer-lists ul li {
+  margin-top: 19px;
+}
+
+.footer-email {
+  margin-top: 30px;
+}
+
+.footer-phone {
+  margin-top: 7px;
+}
+
+.scroll-up {
+  position: absolute;
+  right: 32px;
+  bottom: 23px;
+}

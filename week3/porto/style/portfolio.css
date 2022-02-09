@@ -1,0 +1,29 @@
+.portfolio-subtitle {
+  margin-top: 19px;
+}
+
+.portfolio-content {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.portfolio-gallery {
+  margin: 18px auto 0 auto;
+}
+
+.portfolio-gallery .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.portfolio-gallery .column {
+  padding: 0 6px;
+  flex: 50%;
+}
+
+.portfolio-gallery .column img {
+  margin-top: 12px;
+  width: 100%;
+  vertical-align: middle;
+  box-shadow: 1px 1px 3px #333;
+}
