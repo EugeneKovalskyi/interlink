@@ -17,14 +17,16 @@ class Task {
   }
 
   async create(list_id, title, due_date) {
+    console.log(due_date)
     const task = await psql.query(
-      'INSERT INTO tasks (title, done, due_date, list_id) values ($1, false, $2) RETURNING *',
+      'INSERT INTO tasks (title, done, due_date, list_id) values ($1, false, $2, $3) RETURNING *',
       [title, due_date, list_id]
     )
+    console.log(task.rows[0])
     return task.rows[0]
   }
 
-  async remove(id, title, done, due_date) {
+  async update(id, title, done, due_date) {
     const originalValues = await psql.query('SELECT * FROM tasks WHERE id=$1', [
       id,
     ])
