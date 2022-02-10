@@ -21,11 +21,6 @@ a {
   text-decoration: none;
 }
 
-section,
-footer {
-  padding: 25px 34px;
-}
-
 h2 {
   font-size: 24px;
   font-weight: 600;
@@ -36,4 +31,8 @@ h3 {
   font-size: 14px;
   font-weight: 500;
   text-align: center;
+}
+
+.container {
+  padding: 25px;
 }

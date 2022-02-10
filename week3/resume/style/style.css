@@ -233,6 +233,10 @@ section {
 }
 
 @media (max-width: 700px) {
+  body {
+    font-size: 12px;
+  }
+
   .main {
     text-align: center;
   }
@@ -249,5 +253,21 @@ section {
 
   .main-position {
     padding: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .header a {
+    margin-left: 1em;
+  }
+
+  .about-table,
+  .skills-list li {
+    font-size: inherit;
+  }
+
+  .skills-list li {
+    padding-left: 80px;
+    padding-right: 80px;
   }
 }

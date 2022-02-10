@@ -1,13 +1,14 @@
 .header {
+  color: #fff;
+  text-align: center;
   background-image: url('../img/header.png');
   background-size: cover;
   background-repeat: no-repeat;
 }
 
 .header > .container {
-  padding: 36px 34px 50px 34px;
-  text-align: center;
-  color: #fff;
+  padding-top: 36px;
+  padding-bottom: 50px;
   background-color: #c66c4966;
 }
 
@@ -17,6 +18,14 @@
   left: 34px;
   width: 24px;
   height: 24px;
+}
+
+.header-header {
+  position: absolute;
+  display: none;
+  top: 75px;
+  right: 100px;
+  font-size: 14px;
 }
 
 .header-burger span {
@@ -55,4 +64,8 @@
   margin-top: 41px;
   font-size: 13px;
   text-decoration: underline;
+}
+
+.header-link a:hover {
+  color: #f5d6ab;
 }

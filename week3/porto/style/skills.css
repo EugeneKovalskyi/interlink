@@ -27,7 +27,7 @@
 .skills-img {
   display: block;
   margin: 25px auto 0 auto;
-  width: 224px;
+  max-width: 224px;
 }
 
 .skills-table {

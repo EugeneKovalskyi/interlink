@@ -1,16 +1,15 @@
 .footer {
-  position: relative;
   margin-bottom: 25px;
 }
 
 .footer-lists {
   display: flex;
   flex-wrap: wrap;
+  margin-top: 6px;
   font-size: 14px;
 }
 
 .footer-lists ul {
-  margin-top: 6px;
   list-style-type: none;
   flex: 50%;
 }
@@ -19,16 +18,20 @@
   margin-top: 19px;
 }
 
-.footer-email {
+.footer-lists ul:nth-child(3) {
   margin-top: 30px;
 }
 
-.footer-phone {
-  margin-top: 7px;
+.footer a:hover {
+  color: #c66c49;
 }
 
 .scroll-up {
-  position: absolute;
+  position: fixed;
   right: 32px;
   bottom: 23px;
+}
+
+.scroll-up:hover {
+  cursor: pointer;
 }

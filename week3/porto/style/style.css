@@ -16,12 +16,8 @@
 /* portfolio */
 @import url('portfolio.css');
 
+/* footer */
 @import url('footer.css');
 
-/*
-background 1 :  #fff
-background 2 :  #fffaf2
-text :          #333
-primary light : #f5d6ab
-primary :       #c66c49
-*/
+/* media */
+@import url('media.css');

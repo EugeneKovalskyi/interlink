@@ -1,0 +1,243 @@
+/* 576px */
+@media (min-width: 540px) {
+  .container {
+    padding: 30px 50px;
+  }
+
+  .header > .container {
+    padding-bottom: 70px;
+  }
+
+  .about-content,
+  .portfolio-content {
+    line-height: 20px;
+  }
+
+  .skills-img {
+    max-width: 240px;
+  }
+
+  .skills-table {
+    border-spacing: 48px 12px;
+  }
+}
+
+@media (min-width: 850px) {
+  /* default */
+  body {
+    font-size: 14px;
+  }
+
+  h1,
+  h2,
+  h3,
+  p {
+    text-align: left;
+  }
+
+  .container {
+    padding: 50px 100px;
+  }
+
+  /* header */
+  .header {
+    position: relative;
+  }
+
+  .header > .container {
+    padding-top: 70px;
+    padding-bottom: 140px;
+  }
+
+  .header-burger {
+    display: none;
+  }
+
+  .header-header {
+    display: block;
+  }
+
+  .header-header .active {
+    font-weight: 700;
+  }
+
+  .header-header a {
+    margin-left: 15px;
+  }
+
+  .header-header a:hover {
+    color: #f5d6ab;
+  }
+
+  .header-subtitle__1 {
+    margin-top: 90px;
+  }
+
+  /* about */
+  .about-content {
+    line-height: 25px;
+  }
+
+  /* skills */
+  .skills-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 30px;
+  }
+
+  .skills-img {
+    margin: 0;
+    flex: 50%;
+  }
+
+  .skills-table {
+    margin: 0;
+    padding-left: 50px;
+    flex: 50%;
+    border-spacing: 0 12px;
+  }
+
+  /* portfolio */
+  .portfolio {
+    position: relative;
+  }
+
+  .portfolio-wrapper {
+    display: flex;
+    margin-top: 30px;
+    flex-wrap: wrap;
+  }
+
+  .portfolio-content {
+    padding-top: 10px;
+    padding-right: 75px;
+    flex: 50%;
+    text-align: left;
+    line-height: 25px;
+  }
+
+  .portfolio-gallery {
+    flex: 50%;
+  }
+
+  .portfolio-slide__arrows {
+    position: absolute;
+    display: block;
+    transform: translateY(-100%);
+  }
+
+  .portfolio-slide__left,
+  .portfolio-slide__right {
+    margin-left: 5px;
+    cursor: pointer;
+  }
+
+  /* footer */
+  .footer-lists {
+    margin-top: 30px;
+  }
+
+  .footer-email {
+    margin-top: 50px;
+  }
+}
+
+@media (min-width: 1250px) {
+  /* default */
+  body {
+    font-size: 18px;
+  }
+
+  h3 {
+    font-size: inherit;
+  }
+
+  .container {
+    padding: 93px 165px;
+  }
+
+  /* header */
+  .header > .container {
+    padding-top: 93px;
+    padding-bottom: 240px;
+    background-color: #c56c494d;
+  }
+
+  .header-header {
+    top: 93px;
+    font-size: inherit;
+  }
+
+  .header-header a {
+    margin-left: 60px;
+  }
+
+  .header-subtitle__1 {
+    margin-top: 145px;
+    font-size: 64px;
+  }
+
+  .header-subtitle__2 {
+    margin-top: 26px;
+    font-size: 24px;
+  }
+
+  .header-link {
+    margin-top: 106px;
+    font-size: inherit;
+  }
+
+  /* about */
+  .about-content {
+    margin-top: 76px;
+  }
+
+  /* skills */
+  .skills-wrapper {
+    margin-top: 86px;
+  }
+
+  .skills-img {
+    min-width: 340px;
+    min-height: 350px;
+  }
+
+  .skills-table {
+    padding-left: 125px;
+  }
+
+  .skills-table tr:first-child td {
+    padding-bottom: 65px;
+  }
+
+  /* portfolio */
+  .portfolio-wrapper {
+    margin-top: 41px;
+  }
+
+  .portfolio-subtitle {
+    margin-top: 86px;
+  }
+
+  .portfolio-content {
+    flex: 40%;
+  }
+
+  .portfolio-gallery {
+    flex: 60%;
+  }
+
+  .portfolio-slide__left,
+  .portfolio-slide__right {
+    min-width: 24px;
+  }
+
+  /* footer */
+  .footer-lists ul {
+    flex: 33%;
+  }
+
+  .footer-lists ul:last-child {
+    margin: 0;
+  }
+}

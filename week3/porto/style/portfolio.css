@@ -27,3 +27,7 @@
   vertical-align: middle;
   box-shadow: 1px 1px 3px #333;
 }
+
+.portfolio-slide__arrows {
+  display: none;
+}
