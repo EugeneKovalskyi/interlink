@@ -35,12 +35,18 @@
   border-spacing: 16px 12px;
 }
 
+.skills-table tr {
+  position: relative;
+}
+
 .skills-table tr td:first-child {
   font-weight: 600;
 }
 
 .skills-table tr:nth-child(2n) td:nth-child(2n) {
-  position: relative;
+  position: absolute;
+  width: 60%;
+  height: 15px;
   background-color: #f5d6ab;
 }
 

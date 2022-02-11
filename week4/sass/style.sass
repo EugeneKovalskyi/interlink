@@ -1,0 +1,36 @@
+@import 'default'
+
+.todo
+  margin-top: 3rem
+
+  &-list
+    margin-top: 2rem
+
+  &-task
+    &-checkbox
+      margin-right: 1rem
+
+      &:checked ~ .todo-task-label 
+        color: #aaa
+        text-decoration: line-through
+
+      &:checked ~ .todo-task-due_date 
+        display: none
+      
+      &:checked ~ .todo-task-description
+        display: none
+
+    
+    &-due_date
+      margin-left: 2em
+      font-size: 0.9rem
+
+      &--overdue
+        color: #900
+
+
+
+    &-description
+      margin-left: 4rem
+      font-size: 0.8rem
+      color: #777

@@ -16,9 +16,14 @@
   flex-wrap: wrap;
 }
 
-.portfolio-gallery .column {
+.portfolio-gallery .column:nth-child(1) {
   padding: 0 6px;
-  flex: 50%;
+  flex: 57.5%;
+}
+
+.portfolio-gallery .column:nth-child(2) {
+  padding: 0 6px;
+  flex: 42.5%;
 }
 
 .portfolio-gallery .column img {

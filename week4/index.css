@@ -1,0 +1,46 @@
+body {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-weight: 400;
+  color: #333;
+  background-color: #ffffcc;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.todo {
+  margin-top: 3rem;
+}
+.todo-list {
+  margin-top: 2rem;
+}
+.todo-task-checkbox {
+  margin-right: 1rem;
+}
+.todo-task-checkbox:checked ~ .todo-task-label {
+  color: #aaa;
+  text-decoration: line-through;
+}
+.todo-task-checkbox:checked ~ .todo-task-due_date {
+  display: none;
+}
+.todo-task-checkbox:checked ~ .todo-task-description {
+  display: none;
+}
+.todo-task-due_date {
+  margin-left: 2em;
+  font-size: 0.9rem;
+}
+.todo-task-due_date--overdue {
+  color: #900;
+}
+.todo-task-description {
+  margin-left: 4rem;
+  font-size: 0.8rem;
+  color: #777;
+}
+
+/*# sourceMappingURL=index.css.map */

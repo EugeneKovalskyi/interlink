@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "start": "nodemon week1/server.js"
+    "start": "nodemon week1/server.js",
+    "sass": "sass --watch week4/sass/style.sass week4/index.css"
   },
   "name": "interlink",
   "version": "1.0.0",
@@ -12,7 +13,8 @@
     "pg": "^8.7.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "sass": "^1.49.7"
   },
   "repository": {
     "type": "git",
