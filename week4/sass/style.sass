@@ -3,10 +3,24 @@
 .todo
   margin-top: 3rem
 
+  .container
+    display: flex
+    flex-wrap: wrap
+
+  &-wrapper
+    flex: 50%
+
   &-list
     margin-top: 2rem
 
   &-task
+    margin-top: 1rem
+
+    &__remove-btn
+      margin-right: 1rem
+      padding: 0 !important
+      
+
     &-checkbox
       margin-right: 1rem
 
@@ -15,10 +29,11 @@
         text-decoration: line-through
 
       &:checked ~ .todo-task-due_date 
-        display: none
+        color: #aaa
       
       &:checked ~ .todo-task-description
-        display: none
+        color: #aaa
+
 
     
     &-due_date
@@ -34,3 +49,31 @@
       margin-left: 4rem
       font-size: 0.8rem
       color: #777
+
+    &--done
+      display: none
+
+  &-isall
+    margin-top: 2rem
+
+    &-checkbox
+      margin-right: 1rem
+
+  &-form
+    label
+      margin-top: 1rem
+
+    &-title
+      display: block
+      max-width: 20rem
+
+    &-description
+      display: block
+      max-width: 25rem
+
+    &-due_date
+      display: block
+      max-width: 15rem
+
+    &-button
+      margin-top: 1.5rem

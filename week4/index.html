@@ -18,8 +18,53 @@
     <main class="main">
       <section class="todo">
         <div class="container">
-          <h1 class="todo-title">Todolist</h1>
-          <div class="todo-list"></div>
+          <div class="todo-wrapper">
+            <h1 class="todo-title">Todolist</h1>
+            <div class="todo-list"></div>
+            <div class="todo-isall">
+              <input
+                class="todo-isall-checkbox"
+                type="checkbox"
+                id="isAll"
+                name="isAll"
+                value="null"
+              />
+              <label class="todo-isall-label" for="isAll">Show all tasks</label>
+            </div>
+          </div>
+          <div class="todo-wrapper">
+            <h2 class="todo-form-header">Create Task</h2>
+            <form class="todo-form" action="" name="createTask">
+              <label for="title" class="form-label">Title</label>
+              <input
+                id="title"
+                class="todo-form-title form-control"
+                type="text"
+                name="title"
+                placeholder="Title"
+                required
+              />
+              <label for="description" class="form-label">Description</label>
+              <input
+                id="description"
+                class="todo-form-description form-control"
+                type="text"
+                name="description"
+                placeholder="Description"
+              />
+              <label for="dueDate" class="form-label">Due date</label>
+              <input
+                id="dueDate"
+                class="todo-form-due_date form-control"
+                type="datetime-local"
+                name="dueDate"
+                placeholder="Due date"
+              />
+              <button class="todo-form-button btn btn-primary" type="submit">
+                Create new task
+              </button>
+            </form>
+          </div>
         </div>
       </section>
     </main>

@@ -14,8 +14,22 @@ a {
 .todo {
   margin-top: 3rem;
 }
+.todo .container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.todo-wrapper {
+  flex: 50%;
+}
 .todo-list {
   margin-top: 2rem;
+}
+.todo-task {
+  margin-top: 1rem;
+}
+.todo-task__remove-btn {
+  margin-right: 1rem;
+  padding: 0 !important;
 }
 .todo-task-checkbox {
   margin-right: 1rem;
@@ -25,10 +39,10 @@ a {
   text-decoration: line-through;
 }
 .todo-task-checkbox:checked ~ .todo-task-due_date {
-  display: none;
+  color: #aaa;
 }
 .todo-task-checkbox:checked ~ .todo-task-description {
-  display: none;
+  color: #aaa;
 }
 .todo-task-due_date {
   margin-left: 2em;
@@ -41,6 +55,33 @@ a {
   margin-left: 4rem;
   font-size: 0.8rem;
   color: #777;
+}
+.todo-task--done {
+  display: none;
+}
+.todo-isall {
+  margin-top: 2rem;
+}
+.todo-isall-checkbox {
+  margin-right: 1rem;
+}
+.todo-form label {
+  margin-top: 1rem;
+}
+.todo-form-title {
+  display: block;
+  max-width: 20rem;
+}
+.todo-form-description {
+  display: block;
+  max-width: 25rem;
+}
+.todo-form-due_date {
+  display: block;
+  max-width: 15rem;
+}
+.todo-form-button {
+  margin-top: 1.5rem;
 }
 
 /*# sourceMappingURL=index.css.map */
