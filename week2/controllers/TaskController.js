@@ -26,10 +26,10 @@ class TaskController {
   }
 
   create(req, res) {
-    const listId = req.params.listId
-    const { title, dueDate } = req.body
+    const list_id = req.params.listId
+    const { title, description, due_date } = req.body
 
-    Task.create(listId, title, dueDate)
+    Task.create(list_id, title, description, due_date)
       .then((task) => res.json(task))
       .catch((error) => {
         console.error(error)
@@ -39,9 +39,9 @@ class TaskController {
 
   update(req, res) {
     const id = req.params.id
-    let { title, done, dueDate } = req.body
+    const { title, done, description, due_date } = req.body
 
-    Task.update(id, title, done, dueDate)
+    Task.update(id, title, done, description, due_date)
       .then((task) => res.json(task))
       .catch((error) => {
         console.error(error)

@@ -20,16 +20,40 @@
         <div class="container">
           <div class="todo-wrapper">
             <h1 class="todo-title">Todolist</h1>
-            <div class="todo-list"></div>
-            <div class="todo-isall">
+            <div class="todo-list">
+              <template id="task-template">
+                <div class="todo-task">
+                  <button
+                    class="todo-task__remove-btn btn btn-light"
+                    type="button"
+                  >
+                    &#x1f5d1;
+                  </button>
+                  <input
+                    type="checkbox"
+                    class="todo-task-checkbox form-check-input"
+                    value="false"
+                  />
+                  <label
+                    for=""
+                    class="todo-task-title form-check-label"
+                  ></label>
+                  <span class="todo-task__due-date"></span>
+                  <p class="todo-task-description"></p>
+                </div>
+              </template>
+            </div>
+            <div class="todo__is-all">
               <input
-                class="todo-isall-checkbox"
+                class="todo__is-all__checkbox"
                 type="checkbox"
-                id="isAll"
-                name="isAll"
+                id="is-all"
+                name="is-all"
                 value="null"
               />
-              <label class="todo-isall-label" for="isAll">Show all tasks</label>
+              <label class="todo__is-sall__label" for="is-all"
+                >Show all tasks</label
+              >
             </div>
           </div>
           <div class="todo-wrapper">
@@ -52,12 +76,12 @@
                 name="description"
                 placeholder="Description"
               />
-              <label for="dueDate" class="form-label">Due date</label>
+              <label for="due_date" class="form-label">Due date</label>
               <input
-                id="dueDate"
+                id="due_date"
                 class="todo-form-due_date form-control"
                 type="datetime-local"
-                name="dueDate"
+                name="due_date"
                 placeholder="Due date"
               />
               <button class="todo-form-button btn btn-primary" type="submit">

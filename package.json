@@ -1,12 +1,13 @@
 {
   "scripts": {
-    "start": "nodemon week1/server.js",
+    "start": "nodemon week2/server.js",
     "sass": "sass --watch week4/sass/style.sass week4/index.css"
   },
   "name": "interlink",
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "csv-parser": "^3.0.0",
     "express": "^4.17.2",
     "minimist": "^1.2.5",

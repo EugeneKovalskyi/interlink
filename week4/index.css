@@ -30,26 +30,32 @@ a {
 .todo-task__remove-btn {
   margin-right: 1rem;
   padding: 0 !important;
+  box-shadow: 1px 1px 4px #333;
 }
 .todo-task-checkbox {
   margin-right: 1rem;
+  box-shadow: 1px 1px 4px #333;
 }
-.todo-task-checkbox:checked ~ .todo-task-label {
+.todo-task-checkbox:checked ~ .todo-task-title {
   color: #aaa;
   text-decoration: line-through;
 }
-.todo-task-checkbox:checked ~ .todo-task-due_date {
+.todo-task-checkbox:checked ~ .todo-task__due-date {
   color: #aaa;
 }
 .todo-task-checkbox:checked ~ .todo-task-description {
   color: #aaa;
 }
-.todo-task-due_date {
+.todo-task__due-date {
   margin-left: 2em;
   font-size: 0.9rem;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 0.3rem;
 }
-.todo-task-due_date--overdue {
-  color: #900;
+.todo-task__due-date--overdue {
+  color: #eee;
+  background-color: #a00;
 }
 .todo-task-description {
   margin-left: 4rem;
@@ -59,14 +65,20 @@ a {
 .todo-task--done {
   display: none;
 }
-.todo-isall {
-  margin-top: 2rem;
+.todo__is-all {
+  margin-top: 3rem;
 }
-.todo-isall-checkbox {
+.todo__is-all__checkbox {
   margin-right: 1rem;
+  width: 1.2rem;
+  height: 1.2rem;
+  box-shadow: 1px 1px 2px #333;
 }
 .todo-form label {
   margin-top: 1rem;
+}
+.todo-form input {
+  box-shadow: 2px 2px 4px #333;
 }
 .todo-form-title {
   display: block;
@@ -82,6 +94,7 @@ a {
 }
 .todo-form-button {
   margin-top: 1.5rem;
+  box-shadow: 2px 2px 4px #333;
 }
 
 /*# sourceMappingURL=index.css.map */

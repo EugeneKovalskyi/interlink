@@ -19,31 +19,32 @@
     &__remove-btn
       margin-right: 1rem
       padding: 0 !important
+      box-shadow: 1px 1px 4px #333
       
-
     &-checkbox
       margin-right: 1rem
+      box-shadow: 1px 1px 4px #333
 
-      &:checked ~ .todo-task-label 
+      &:checked ~ .todo-task-title 
         color: #aaa
         text-decoration: line-through
 
-      &:checked ~ .todo-task-due_date 
+      &:checked ~ .todo-task__due-date 
         color: #aaa
       
       &:checked ~ .todo-task-description
         color: #aaa
 
-
-    
-    &-due_date
+    &__due-date
       margin-left: 2em
       font-size: 0.9rem
+      background-color: #eee
+      border-radius: 5px
+      padding: 0.3rem
 
       &--overdue
-        color: #900
-
-
+        color: #eee
+        background-color: #a00
 
     &-description
       margin-left: 4rem
@@ -53,15 +54,21 @@
     &--done
       display: none
 
-  &-isall
-    margin-top: 2rem
+  &__is-all
+    margin-top: 3rem
 
-    &-checkbox
+    &__checkbox
       margin-right: 1rem
+      width: 1.2rem
+      height: 1.2rem
+      box-shadow: 1px 1px 2px #333
 
   &-form
     label
       margin-top: 1rem
+
+    input
+      box-shadow: 2px 2px 4px #333
 
     &-title
       display: block
@@ -77,3 +84,4 @@
 
     &-button
       margin-top: 1.5rem
+      box-shadow: 2px 2px 4px #333

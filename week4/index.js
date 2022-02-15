@@ -1,75 +1,28 @@
-const tasksArray = [
-  {
-    id: 1,
-    title: 'Cleaning room',
-    done: true,
-    due_date: new Date('2022-02-10T20:00:00.000Z'),
-    description: 'only kitchen',
-  },
-  {
-    id: 2,
-    title: 'Cooking food',
-    done: false,
-    due_date: new Date('2022-02-11T20:00:00.000Z'),
-  },
-  {
-    id: 3,
-    title: 'Buy book',
-    done: false,
-    due_date: new Date('2022-01-12T20:00:00.000Z'),
-    description: 'buy Robinzon Kruzo',
-  },
-  {
-    id: 4,
-    title: 'Read new book',
-    done: false,
-    due_date: new Date('2022-02-13T20:00:00.000Z'),
-  },
-  {
-    id: 5,
-    title: 'Go to the gym',
-    done: false,
-    due_date: new Date('2022-02-14T20:00:00.000Z'),
-  },
-  {
-    id: 6,
-    title: 'Learn JS',
-    done: false,
-    due_date: new Date('2022-02-15T20:00:00.000Z'),
-  },
-]
-
-const todoListElement = document.querySelector('.todo-list')
-const isAllCheckboxElement = document.querySelector('.todo-isall-checkbox')
+const isAllCheckboxElement = document.querySelector('.todo__is-all__checkbox')
 const createTaskFormElement = document.forms.createTask
 
-// todolist rendering
-for (let task of tasksArray) {
-  appendTaskToListElement(task)
-}
+window.addEventListener('load', getTasks)
 
-// change listener
 document.addEventListener('change', (event) => {
   const target = event.target
 
-  // task-checkbox
+  // set task done
   if (target.classList.contains('todo-task-checkbox')) {
     setTaskDone(target)
   }
 
-  // isAll-checkbox
+  // show and hide done tasks
   if (target === isAllCheckboxElement) {
     showAllTasks()
   }
 })
 
-// click listener
 document.addEventListener('click', (event) => {
   const target = event.target
 
   // remove task
   if (target.classList.contains('todo-task__remove-btn')) {
-    target.closest('.todo-task').remove()
+    removeTask(target)
   }
 })
 
@@ -79,80 +32,71 @@ document.addEventListener('submit', (event) => {
   event.preventDefault()
 
   if (target === createTaskFormElement) {
-    createNewTask(target)
+    createTask(target)
   }
 })
 
-// functions //
+function appendTaskToList(task) {
+  const taskTemplate = document
+    .getElementById('task-template')
+    .content.cloneNode(true)
 
-function appendTaskToListElement(task) {
-  const currentTime = new Date().getTime()
+  const todoListElement = document.querySelector('.todo-list')
+  const taskElement = taskTemplate.querySelector('.todo-task')
+  const checkboxElement = taskTemplate.querySelector('.todo-task-checkbox')
+  const titleElement = taskTemplate.querySelector('.todo-task-title')
+  const dueDateElement = taskTemplate.querySelector('.todo-task__due-date')
+  const descriptionElement = taskTemplate.querySelector(
+    '.todo-task-description'
+  )
 
-  const taskElement = document.createElement('div')
-  const titleElement = document.createElement('label')
-  const checkboxElement = document.createElement('input')
-  const removeButton = document.createElement('button')
-
-  // add class
-  if (task.done) taskElement.classList.add('todo-task--done')
-  taskElement.classList.add('todo-task')
-  checkboxElement.classList.add('todo-task-checkbox', 'form-check-input')
-  titleElement.classList.add('todo-task-label', 'form-check-label')
-  removeButton.classList.add('todo-task__remove-btn', 'btn', 'btn-light')
-
-  // set attribute
-  if (task.done) checkboxElement.setAttribute('checked', null)
-  checkboxElement.setAttribute('type', 'checkbox')
-  checkboxElement.setAttribute('id', `task${task.id}`)
-  checkboxElement.setAttribute('name', `task${task.id}`)
-  checkboxElement.setAttribute('value', `${task.done}`)
-  titleElement.setAttribute('for', `task${task.id}`)
-  removeButton.setAttribute('type', 'button')
-
-  // set content
-  titleElement.textContent = task.title
-  removeButton.innerHTML = '&#x1f5d1;'
-
-  taskElement.append(removeButton, checkboxElement, titleElement)
-
-  // if due_date exist
-  if (task.due_date) {
-    const dueTime = task.due_date.getTime()
-    const dueDateElement = document.createElement('span')
-    const date = task.due_date.toISOString().split('T')[0]
-    const time = task.due_date.toISOString().split('T')[1].split('.')[0]
-
-    if (currentTime > dueTime && !task.done) {
-      dueDateElement.classList.add('todo-task-due_date--overdue')
-    }
-
-    dueDateElement.classList.add('todo-task-due_date')
-    dueDateElement.textContent = '* Due date: ' + date + ' ' + time
-    taskElement.append(dueDateElement)
+  if (task.done) {
+    taskElement.classList.add('todo-task--done')
+    checkboxElement.setAttribute('checked', null)
   }
 
-  // if description exist
-  if (task.description) {
-    const descriptionElement = document.createElement('p')
+  taskElement.setAttribute('id', `task-${task.id}`)
+  titleElement.setAttribute('for', `task-${task.id}`)
+  checkboxElement.setAttribute('id', `task-${task.id}`)
+  checkboxElement.setAttribute('name', `task-${task.id}`)
+  checkboxElement.setAttribute('value', `${task.done}`)
 
-    descriptionElement.classList.add('todo-task-description')
+  titleElement.textContent = task.title
+
+  if (task.due_date) {
+    const currentTime = new Date().getTime()
+    const dueTime = new Date(task.due_date).getTime()
+    const dateString = new Date(task.due_date).toISOString().split('T')[0]
+    const timeString = new Date(task.due_date)
+      .toISOString()
+      .split('T')[1]
+      .split('.')[0]
+
+    dueDateElement.textContent = 'Due date: ' + dateString + ' ' + timeString
+
+    if (currentTime > dueTime && !task.done)
+      dueDateElement.classList.add('todo-task__due-date--overdue')
+  }
+
+  if (task.description)
     descriptionElement.textContent = 'Description: ' + task.description
 
-    taskElement.append(descriptionElement)
-  }
-
-  // append task to todolist
-  todoListElement.append(taskElement)
+  todoListElement.append(taskTemplate)
 }
 
 function setTaskDone(target) {
-  const task = target.closest('.todo-task')
+  const taskElement = target.closest('.todo-task')
+  const id = taskElement.getAttribute('id').split('-')[1]
 
-  task.classList.toggle('todo-task--done')
+  taskElement.classList.toggle('todo-task--done')
 
-  if (isAllCheckboxElement.checked) {
-    task.style.display = 'block'
+  if (taskElement.classList.contains('todo-task--done')) {
+    updateTask(id, true)
+  } else {
+    updateTask(id, false)
   }
+
+  if (isAllCheckboxElement.checked) taskElement.style.display = 'block'
 }
 
 function showAllTasks() {
@@ -165,28 +109,78 @@ function showAllTasks() {
   }
 }
 
-function createNewTask(target) {
-  const id = tasksArray.length + 1
+function createTask(target) {
   const title = target.title.value.trim()
   const done = false
   const description = target.description.value.trim() || undefined
-  const due_date = target.dueDate.value
-    ? new Date(target.dueDate.value.split('T').join(' '))
+  const due_date = target.due_date.value
+    ? new Date(target.due_date.value.split('T').join(' '))
     : undefined
 
   if (!title) return
 
-  const newTask = {
-    id,
+  const task = {
     title,
     done,
     due_date,
     description,
   }
 
-  tasksArray.push(newTask)
-
-  appendTaskToListElement(newTask)
+  appendTaskToList(task)
+  postTask(task)
 
   target.reset()
+}
+
+function removeTask(target) {
+  const taskElement = target.closest('.todo-task')
+  const id = taskElement.getAttribute('id').split('-')[1]
+
+  taskElement.remove()
+
+  deleteTask(id)
+}
+
+async function getTasks() {
+  return await fetch('http://localhost:3000/api/lists/1/tasks?all=true')
+    .then((response) => response.json())
+    .then((tasks) => tasks.forEach((task) => appendTaskToList(task)))
+    .catch((error) => {
+      console.error(error)
+      response.status(404).json(error)
+    })
+}
+
+async function postTask(task) {
+  return await fetch('http://localhost:3000/api/lists/1/tasks', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(task),
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error(error)
+      response.status(404).json(error)
+    })
+}
+
+async function updateTask(id, done) {
+  return await fetch(`http://localhost:3000/api/lists/1/tasks/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ done }),
+  })
+}
+
+async function deleteTask(id) {
+  return await fetch(`http://localhost:3000/api/lists/1/tasks/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
 }
