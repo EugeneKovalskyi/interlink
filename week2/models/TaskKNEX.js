@@ -36,7 +36,7 @@ class TaskKNEX {
   }
 
   async remove(id) {
-    const task = await knex('tasks').where('id', id).del()
+    const task = await knex('tasks').where('id', id).del('*')
     return task[0]
   }
 }

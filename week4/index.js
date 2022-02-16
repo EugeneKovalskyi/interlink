@@ -1,10 +1,11 @@
 const isAllCheckboxElement = document.querySelector('.todo__is-all__checkbox')
 const todoListElement = document.querySelector('.todo-list')
 const createTaskFormElement = document.forms.createTask
-// const allTasks = document.querySelectorAll('.todo-task')
 
 window.addEventListener('load', () => {
   getTasks().then((tasks) => tasks.forEach(appendTaskToList))
+
+  isAllCheckboxElement.checked = false
 })
 todoListElement.addEventListener('change', setTaskDone)
 isAllCheckboxElement.addEventListener('change', showAllTasks)
@@ -42,20 +43,23 @@ function appendTaskToList(task) {
     const currentTime = new Date().getTime()
     const dueTime = new Date(task.due_date).getTime()
 
-    dueDateElement.textContent = 'Due date: ' + formatDate(task.due_date)
-
-    if (currentTime > dueTime && !task.done)
+    if (currentTime > dueTime && !task.done) {
       dueDateElement.classList.add('todo-task__due-date--overdue')
+    }
+
+    dueDateElement.textContent =
+      'Due date: ' + new Date(task.due_date).toLocaleDateString()
+  } else {
+    dueDateElement.style.display = 'none'
   }
 
-  if (task.description)
+  if (task.description) {
     descriptionElement.textContent = 'Description: ' + task.description
+  } else {
+    descriptionElement.style.display = 'none'
+  }
 
   todoListElement.append(taskTemplate)
-}
-
-function formatDate(date) {
-  return new Date(date).toLocaleDateString()
 }
 
 function setTaskDone(event) {
@@ -64,10 +68,11 @@ function setTaskDone(event) {
   if (target.classList.contains('todo-task-checkbox')) {
     const taskElement = target.closest('.todo-task')
     const id = taskElement.getAttribute('id').split('-')[1]
+    const done = taskElement.classList.contains('todo-task--done')
 
     taskElement.classList.toggle('todo-task--done')
 
-    updateTask(id, taskElement.classList.contains('todo-task--done'))
+    updateTask(id, !done).catch(errorCallback)
 
     if (isAllCheckboxElement.checked) taskElement.style.display = 'block'
   }
@@ -85,28 +90,22 @@ function showAllTasks() {
 
 function createTask(event) {
   event.preventDefault()
-
   const target = event.target
-  // const id = allTasks.length + 1
+
   const title = target.title.value.trim()
-  const done = false
-  const description = target.description.value.trim() || undefined
-  const due_date = target.due_date.value
-    ? new Date(target.due_date.value.split('T').join(' '))
-    : undefined
+  const description = target.description.value.trim()
+  const due_date = new Date(target.due_date.value)
 
   if (!title) return
 
-  const task = {
-    id,
+  postTask({
     title,
-    done,
     due_date,
     description,
-  }
-
-  appendTaskToList(task)
-  postTask(task)
+  })
+    .then((response) => response.json())
+    .then((task) => appendTaskToList(task))
+    .catch(errorCallback)
 
   target.reset()
 }
@@ -118,7 +117,7 @@ function removeTask(event) {
 
     taskElement.remove()
 
-    deleteTask(id)
+    deleteTask(id).catch(errorCallback)
   }
 }
 
@@ -155,4 +154,8 @@ function deleteTask(id) {
       'Content-Type': 'application/json',
     },
   })
+}
+
+function errorCallback(error) {
+  todoListElement.innerHTML = `<span class="connection-error">Connection Error!</span><br><br><span class="error-description">${error}</span>`
 }

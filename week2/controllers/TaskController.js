@@ -53,7 +53,7 @@ class TaskController {
     const id = req.params.id
 
     Task.remove(id)
-      .then((task) => res.status(204).json('OK'))
+      .then((task) => res.json(task).status(204))
       .catch((error) => {
         console.error(error)
         res.status(500).json({ error })

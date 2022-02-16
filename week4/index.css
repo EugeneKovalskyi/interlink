@@ -86,15 +86,29 @@ a {
 }
 .todo-form-description {
   display: block;
-  max-width: 25rem;
+  max-width: 20rem;
 }
 .todo-form-due_date {
   display: block;
-  max-width: 15rem;
+  max-width: 10rem;
 }
 .todo-form-button {
   margin-top: 1.5rem;
   box-shadow: 2px 2px 4px #333;
+}
+.todo .connection-error {
+  padding: 0.5rem 1.5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+  border-radius: 4px;
+  background-color: #a00;
+}
+.todo .error-description {
+  padding: 0.5rem;
+  color: #333;
+  border-radius: 4px;
+  background-color: #eee;
 }
 
 /*# sourceMappingURL=index.css.map */
