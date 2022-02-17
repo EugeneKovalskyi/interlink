@@ -1,73 +1,56 @@
-const flow = function (...functions) {
-  return function (value) {
-    return functions.reduce(function (res, fn) {
-      return fn(res)
-    }, value)
-  }
-}
-
 const figures = [
   { width: 1, height: 1, color: 'red' },
-  { width: 2, height: 3, color: 'green' },
-  { width: 4, height: 5, color: 'blue' },
+  { width: 6, height: 6, color: 'green' },
+  { width: 2, height: 2, color: 'black' },
+  { width: 4, height: 4, color: 'black' },
+  { width: 5, height: 5, color: 'black' },
+  { width: 3, height: 4, color: 'red' },
+  { width: 5, height: 7, color: 'red' },
+  { width: 8, height: 2, color: 'red' },
+  { width: 1, height: 2, color: 'green' },
+  { width: 3, height: 4, color: 'blue' },
 ]
 
-function defineColor(color) {
-  return function (figure) {
-    return figure.color === color
-  }
-}
+const defineColor = (color) => (figure) => figure.color === color
 
-function map(array, fn) {
-  const newArray = []
+const map = (fn) => (array) => array.map(fn)
+const filter = (fn) => (array) => array.filter(fn)
+const reduce = (fn, initValue) => (array) => array.reduce(fn, initValue)
 
-  for (let index = 0; index < array.length; index++)
-    newArray.push(fn(array[index], index, array))
+const flow =
+  (...funcs) =>
+  (value) =>
+    reduce((result, fn) => fn(result), value)(funcs)
 
-  return newArray
+const compose =
+  (...funcs) =>
+  (value) =>
+    reduce((result, fn) => fn(result), value)(funcs.reverse())
 
-  // return array.map(fn)
-}
+const or = (check1, check2) => (figure) => check1(figure) || check2(figure)
+const and = (check1, check2) => (figure) => check1(figure) && check2(figure)
+const any =
+  (...checks) =>
+  (figure) =>
+    checks.some((check) => check(figure) === true)
+const all =
+  (...checks) =>
+  (figure) =>
+    checks.every((check) => check(figure) === true)
 
-function filter(array, fn) {
-  const newArray = []
+const isSquare = (figure) => figure.width === figure.height
+const isBlack = (figure) => figure.color === 'black'
+const isRed = (figure) => figure.color === 'red'
 
-  for (let index = 0; index < array.length; index++)
-    if (fn(item, index, array)) newArray.push(item)
+const countArea = (figure) => figure.width * figure.height
+const countPerimeter = (figure) => (figure.width + figure.height) * 2
 
-  return newArray
-}
+const findMaxArea = (areas) => Math.max(...areas)
+const sumPerimeters = (perimeters) =>
+  perimeters.reduce((result, perimeter) => result + perimeter)
 
-function reduce(array, fn, initValue) {
-  let accumulator = initValue || array[0]
-  let index = initValue ? 0 : 1
+console.log(flow(filter(isRed), map(countPerimeter), sumPerimeters)(figures))
 
-  for (; index < array.length; index++)
-    accumulator = fn(accumulator, array[index], index, array)
-
-  return accumulator
-}
-
-function flow(...functions) {
-  return function (value) {
-    return reduce(
-      functions,
-      function (accumulator, fn) {
-        return fn(accumulator)
-      },
-      value
-    )
-  }
-}
-
-function compose(...functions) {
-  return function (value) {
-    return reduce(
-      functions.reverse(),
-      function (accumulator, fn) {
-        return fn(accumulator)
-      },
-      value
-    )
-  }
-}
+console.log(
+  flow(filter(and(isBlack, isSquare)), map(countArea), findMaxArea)(figures)
+)
