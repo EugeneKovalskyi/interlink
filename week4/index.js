@@ -60,8 +60,6 @@ function appendTaskToList(task) {
   }
 
   todoListElement.append(taskTemplate)
-
-  // return taskTemplate
 }
 
 function setTaskDone(event) {
@@ -75,11 +73,6 @@ function setTaskDone(event) {
     taskElement.classList.toggle('todo-task--done')
 
     updateTask(id, !done).catch(errorCallback)
-    // .then((response) => response.json())
-    // .then((task) => {
-    //   // console.log(task)
-    //   target.replaceWith(appendTaskToList(task))
-    // })
 
     if (isAllCheckboxElement.checked) taskElement.style.display = 'block'
   }
