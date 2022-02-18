@@ -11,7 +11,7 @@ const figures = [
   { width: 3, height: 4, color: 'blue' },
 ]
 
-const defineColor = (color) => (figure) => figure.color === color
+const hasColor = (color) => (data) => data.color === color
 
 const map = (fn) => (array) => array.map(fn)
 const filter = (fn) => (array) => array.filter(fn)
@@ -27,30 +27,34 @@ const compose =
   (value) =>
     reduce((result, fn) => fn(result), value)(funcs.reverse())
 
-const or = (check1, check2) => (figure) => check1(figure) || check2(figure)
-const and = (check1, check2) => (figure) => check1(figure) && check2(figure)
+const or = (check1, check2) => (data) => check1(data) || check2(data)
+const and = (check1, check2) => (data) => check1(data) && check2(data)
 const any =
   (...checks) =>
-  (figure) =>
-    checks.some((check) => check(figure) === true)
+  (data) =>
+    checks.some((check) => check(data) === true)
 const all =
   (...checks) =>
-  (figure) =>
-    checks.every((check) => check(figure) === true)
+  (data) =>
+    checks.every((check) => check(data) === true)
 
 const isSquare = (figure) => figure.width === figure.height
-const isBlack = (figure) => figure.color === 'black'
-const isRed = (figure) => figure.color === 'red'
+const isBlack = hasColor('black')
+const isRed = hasColor('red')
 
-const countArea = (figure) => figure.width * figure.height
-const countPerimeter = (figure) => (figure.width + figure.height) * 2
+const calcArea = (figure) => figure.width * figure.height
+const calcPerimeter = (figure) => (figure.width + figure.height) * 2
 
-const findMaxArea = (areas) => Math.max(...areas)
-const sumPerimeters = (perimeters) =>
-  perimeters.reduce((result, perimeter) => result + perimeter)
+const findMax = (list) => Math.max(...list)
+const sum = reduce((result, item) => result + item, 0)
 
-console.log(flow(filter(isRed), map(countPerimeter), sumPerimeters)(figures))
+const sumRedPerimeter = flow(filter(isRed), map(calcPerimeter), sum)
 
-console.log(
-  flow(filter(and(isBlack, isSquare)), map(countArea), findMaxArea)(figures)
+const maxBlackSquareArea = flow(
+  filter(and(isBlack, isSquare)),
+  map(calcArea),
+  findMax
 )
+
+console.log(sumRedPerimeter(figures))
+console.log(maxBlackSquareArea(figures))

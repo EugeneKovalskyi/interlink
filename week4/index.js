@@ -1,6 +1,6 @@
 const isAllCheckboxElement = document.querySelector('.todo__is-all__checkbox')
 const todoListElement = document.querySelector('.todo-list')
-const createTaskFormElement = document.forms.createTask
+const newTaskForm = document.forms.createTask
 
 window.addEventListener('load', () => {
   getTasks().then((tasks) => tasks.forEach(appendTaskToList))
@@ -10,7 +10,7 @@ window.addEventListener('load', () => {
 todoListElement.addEventListener('change', setTaskDone)
 isAllCheckboxElement.addEventListener('change', showAllTasks)
 todoListElement.addEventListener('click', removeTask)
-createTaskFormElement.addEventListener('submit', createTask)
+newTaskForm.addEventListener('submit', createTask)
 
 function appendTaskToList(task) {
   const taskTemplate = document
@@ -60,6 +60,8 @@ function appendTaskToList(task) {
   }
 
   todoListElement.append(taskTemplate)
+
+  // return taskTemplate
 }
 
 function setTaskDone(event) {
@@ -73,6 +75,11 @@ function setTaskDone(event) {
     taskElement.classList.toggle('todo-task--done')
 
     updateTask(id, !done).catch(errorCallback)
+    // .then((response) => response.json())
+    // .then((task) => {
+    //   // console.log(task)
+    //   target.replaceWith(appendTaskToList(task))
+    // })
 
     if (isAllCheckboxElement.checked) taskElement.style.display = 'block'
   }
@@ -104,7 +111,7 @@ function createTask(event) {
     description,
   })
     .then((response) => response.json())
-    .then((task) => appendTaskToList(task))
+    .then(appendTaskToList)
     .catch(errorCallback)
 
   target.reset()
