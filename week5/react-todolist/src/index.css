@@ -6,22 +6,17 @@ form {
   margin: 0;
 }
 
-html {
+body {
   font-size: 20px;
   height: 100%;
+  box-sizing: border-box;
 }
 
-body,
 #root {
   display: flex;
   align-items: stretch;
   flex-direction: row;
   justify-content: center;
   height: 100%;
-  box-sizing: border-box;
-}
-
-#root {
-  padding: 1rem 2rem;
-  flex: 100%;
+  padding: 5rem;
 }
