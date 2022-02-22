@@ -54,11 +54,15 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== id))
   }
 
+  function addTask(task) {
+    setTasks(tasks.concat([task]))
+  }
+
   return (
     <div className={styles.app}>
       <Sidebar lists={lists} />
       <TasksList tasks={tasks} setTask={toggleTask} deleteTask={deleteTask} />
-      <Form />
+      <Form tasks={tasks} addTask={addTask} />
     </div>
   )
 }
