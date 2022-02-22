@@ -2,6 +2,7 @@
   margin-top: 2rem;
 }
 
-.input {
-  margin-right: 1rem;
+.link {
+  text-decoration: none;
+  color: #09c;
 }

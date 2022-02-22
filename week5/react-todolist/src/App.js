@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styles from './style/App.module.css'
 
 import Sidebar from './components/Sidebar'
@@ -38,19 +38,9 @@ function App() {
     },
   ]
 
-  const [selectedListId, setListId] = useState(1)
-
-  function selectList(listId) {
-    setListId(listId)
-  }
-
   return (
     <div className={styles.app}>
-      <Sidebar
-        lists={lists}
-        selectList={selectList}
-        selectedListId={selectedListId}
-      />
+      <Sidebar lists={lists} />
       <TasksList tasks={tasks} />
     </div>
   )
