@@ -1,0 +1,39 @@
+.delete {
+  margin-right: 2rem;
+  padding: 0.3rem 0.5rem;
+  background-color: #eee;
+  box-shadow: 1px 1px 3px #555;
+  border: none;
+  border-radius: 4px;
+  opacity: 0.5;
+}
+
+.delete:hover {
+  opacity: 1;
+}
+
+.checkbox {
+  margin-right: 2rem;
+  box-shadow: 1px 1px 4px #555;
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.checkbox:checked ~ span {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.date {
+  margin-left: 2em;
+  font-size: 0.9rem;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 0.3rem;
+}
+
+.description {
+  margin-left: 4rem;
+  font-size: 0.9rem;
+  color: #555;
+}
