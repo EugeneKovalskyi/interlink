@@ -4,9 +4,13 @@
 
 .link {
   padding: 0.2rem 1rem;
-  color: #080;
+  color: #09c;
   text-decoration: none;
-  background-color: #eee;
-  border: 1px solid #080;
+  border: 1px solid #09c;
   border-radius: 3px;
+}
+
+.link:hover {
+  filter: brightness(90%);
+  box-shadow: 1px 1px 5px #999;
 }

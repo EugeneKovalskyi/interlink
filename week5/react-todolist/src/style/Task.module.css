@@ -19,11 +19,6 @@
   height: 1.2rem;
 }
 
-.checkbox:checked ~ span {
-  color: #aaa;
-  text-decoration: line-through;
-}
-
 .date {
   margin-left: 2em;
   font-size: 0.9rem;
@@ -36,4 +31,14 @@
   margin-left: 4rem;
   font-size: 0.9rem;
   color: #555;
+}
+
+.overdue {
+  color: #d00;
+  background-color: #ccc;
+}
+
+.done {
+  color: #aaa;
+  text-decoration: line-through;
 }
