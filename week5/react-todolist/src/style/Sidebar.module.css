@@ -1,5 +1,8 @@
 .sidebar {
+  text-align: center;
   justify-self: center;
+  grid-row-start: 1;
+  grid-row-end: 3;
 }
 
 .link {
@@ -7,10 +10,10 @@
   color: #09c;
   text-decoration: none;
   border: 1px solid #09c;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 
 .link:hover {
-  filter: brightness(90%);
+  filter: brightness(130%);
   box-shadow: 1px 1px 5px #999;
 }

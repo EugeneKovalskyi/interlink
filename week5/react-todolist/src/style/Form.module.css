@@ -1,0 +1,36 @@
+.label:not(label:first-child) {
+  display: block;
+  margin-top: 1.5rem;
+}
+
+.input {
+  display: block;
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.5rem;
+  font-size: inherit;
+  max-width: 20rem;
+  box-shadow: 1px 1px 5px #0099cc80;
+  border-radius: 5px;
+  border: 2px solid #09c;
+  outline: none;
+}
+
+.input:focus {
+  box-shadow: 0 0 7px 1px #09c;
+}
+
+.button {
+  margin-top: 2rem;
+  padding: 0.5rem 0.7rem;
+  font-size: inherit;
+  color: #fff;
+  box-shadow: 1px 1px 4px 0px #333;
+  background-color: #09c;
+  border: none;
+  border-radius: 5px;
+}
+
+.button:hover {
+  filter: brightness(130%);
+  box-shadow: 1px 1px 5px 1px #09c;
+}

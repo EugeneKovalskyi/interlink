@@ -3,6 +3,7 @@ import styles from './style/App.module.css'
 
 import Sidebar from './components/Sidebar'
 import TasksList from './components/TasksList'
+import Form from './components/Form'
 
 function App() {
   const lists = [
@@ -57,6 +58,7 @@ function App() {
     <div className={styles.app}>
       <Sidebar lists={lists} />
       <TasksList tasks={tasks} setTask={toggleTask} deleteTask={deleteTask} />
+      <Form />
     </div>
   )
 }
