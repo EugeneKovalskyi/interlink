@@ -5,6 +5,15 @@
 }
 
 .link {
+  text-decoration: none;
+  color: #09c;
+}
+
+.link:hover {
+  filter: brightness(130%);
+}
+
+.active {
   padding: 0.2rem 1rem;
   color: #09c;
   text-decoration: none;
@@ -12,7 +21,7 @@
   border-radius: 5px;
 }
 
-.link:hover {
+.active:hover {
   filter: brightness(130%);
   box-shadow: 1px 1px 5px #999;
 }

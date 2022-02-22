@@ -48,7 +48,7 @@ function appendTaskToList(task) {
     }
 
     dueDateElement.textContent =
-      'Due date: ' + new Date(task.due_date).toLocaleDateString()
+      'Due date: ' + new Date(task.due_date).toLocaleDateString('uk-UA')
   } else {
     dueDateElement.style.display = 'none'
   }

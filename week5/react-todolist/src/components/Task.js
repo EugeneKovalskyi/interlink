@@ -5,6 +5,7 @@ export default function Task({ task, setTask, deleteTask }) {
   const titleClasses = []
   const dateClasses = [styles.date]
   const descriptionClasses = [styles.description]
+  const due_date = new Date(task.due_date).toLocaleDateString('uk-UA')
 
   function isOverdue() {
     const currentTime = new Date().getTime()
@@ -38,17 +39,13 @@ export default function Task({ task, setTask, deleteTask }) {
         />
         <span className={titleClasses.join(' ')}>{task.title}</span>
       </label>
-      {task.due_date ? (
-        <span className={dateClasses.join(' ')}>Due date: {task.due_date}</span>
-      ) : (
-        ''
+      {task.due_date && (
+        <span className={dateClasses.join(' ')}>Due date: {due_date}</span>
       )}
-      {task.description ? (
+      {task.description && (
         <p className={descriptionClasses.join(' ')}>
           Description: {task.description}
         </p>
-      ) : (
-        ''
       )}
     </div>
   )
