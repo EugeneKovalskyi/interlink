@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './style/App.module.css'
 
 import Sidebar from './components/Sidebar'
@@ -6,38 +6,20 @@ import TasksList from './components/TasksList'
 import Form from './components/Form'
 
 function App() {
-  const lists = [
-    { id: 1, title: 'Everyday' },
-    { id: 2, title: 'Shopping' },
-    { id: 3, title: 'Homework' },
-  ]
+  const [lists, setLists] = useState([])
+  const [tasks, setTasks] = useState([])
 
-  const [tasks, setTasks] = useState([
-    {
-      id: 1,
-      title: 'Read book',
-      done: false,
-      due_date: '2022-03-03',
-      list_id: 1,
-      description: 'I want read Harry Potter',
-    },
-    {
-      id: 2,
-      title: 'Workout',
-      done: false,
-      due_date: '2022-04-04',
-      list_id: 1,
-      description: 'Running, horizontal bar',
-    },
-    {
-      id: 3,
-      title: 'Buy bread',
-      done: true,
-      due_date: '2022-02-02',
-      list_id: 3,
-      description: 'Need white bread',
-    },
-  ])
+  useEffect(() => {
+    fetch('http://localhost:5000/api/lists')
+      .then((res) => res.json())
+      .then(setLists)
+  }, [])
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/lists/1/tasks?all=true')
+      .then((res) => res.json())
+      .then(setTasks)
+  }, [])
 
   function toggleTask(id) {
     setTasks(
