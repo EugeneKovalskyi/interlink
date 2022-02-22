@@ -14,9 +14,9 @@ export default function Form({ tasks, addTask }) {
         id: tasks.length + 1,
         title,
         done: false,
-        due_date: due_date ? due_date : undefined,
+        due_date,
         list_id: 1,
-        description: description ? description : undefined,
+        description,
       })
 
       setTitle('')

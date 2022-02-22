@@ -1,3 +1,7 @@
+.task:not(.task:first-child) {
+  margin-top: 1.5rem;
+}
+
 .delete {
   margin-right: 2rem;
   padding: 0.3rem 0.5rem;

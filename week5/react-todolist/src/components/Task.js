@@ -38,10 +38,18 @@ export default function Task({ task, setTask, deleteTask }) {
         />
         <span className={titleClasses.join(' ')}>{task.title}</span>
       </label>
-      <span className={dateClasses.join(' ')}>Due date: {task.due_date}</span>
-      <p className={descriptionClasses.join(' ')}>
-        Description: {task.description}
-      </p>
+      {task.due_date ? (
+        <span className={dateClasses.join(' ')}>Due date: {task.due_date}</span>
+      ) : (
+        ''
+      )}
+      {task.description ? (
+        <p className={descriptionClasses.join(' ')}>
+          Description: {task.description}
+        </p>
+      ) : (
+        ''
+      )}
     </div>
   )
 }
