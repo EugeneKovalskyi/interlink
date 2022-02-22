@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './style/App.module.css'
 
 import Sidebar from './components/Sidebar'
@@ -11,7 +11,7 @@ function App() {
     { id: 3, title: 'Homework' },
   ]
 
-  const tasks = [
+  const [tasks, setTasks] = useState([
     {
       id: 1,
       title: 'Read book',
@@ -36,12 +36,27 @@ function App() {
       list_id: 3,
       description: 'Need white bread',
     },
-  ]
+  ])
+
+  function toggleTask(id) {
+    setTasks(
+      tasks.map((task) => {
+        if (task.id === id) {
+          task.done = !task.done
+        }
+        return task
+      })
+    )
+  }
+
+  function deleteTask(id) {
+    setTasks(tasks.filter((task) => task.id !== id))
+  }
 
   return (
     <div className={styles.app}>
       <Sidebar lists={lists} />
-      <TasksList tasks={tasks} />
+      <TasksList tasks={tasks} setTask={toggleTask} deleteTask={deleteTask} />
     </div>
   )
 }

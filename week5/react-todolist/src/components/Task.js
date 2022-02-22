@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from '../style/Task.module.css'
 
-export default function Task({ task, setTask }) {
+export default function Task({ task, setTask, deleteTask }) {
   const titleClasses = []
   const dateClasses = [styles.date]
   const descriptionClasses = [styles.description]
@@ -25,7 +25,9 @@ export default function Task({ task, setTask }) {
 
   return (
     <div className={styles.task}>
-      <button className={styles.delete}>X</button>
+      <button className={styles.delete} onClick={() => deleteTask(task.id)}>
+        X
+      </button>
       <label>
         <input
           className={styles.checkbox}
