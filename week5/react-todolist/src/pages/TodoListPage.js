@@ -35,7 +35,12 @@ export default function TodoListPage() {
   }
 
   function deleteTask(id) {
-    setTasks(tasks.filter((task) => task.id !== id))
+    axios
+      .delete(`http://localhost:5000/api/lists/*/tasks/${id}`)
+      .then((res) => {
+        setTasks(tasks.filter((task) => task.id !== id))
+      })
+      .catch((error) => console.log(error))
   }
 
   function addTask(task) {
