@@ -8,7 +8,7 @@ export default function List({ list }) {
       <Link
         className={styles.link}
         id={`list-${list.id}`}
-        to={`lists/${list.id}`}
+        to={`lists/${list.id}/tasks`}
       >
         {list.title}
       </Link>
