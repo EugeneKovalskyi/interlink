@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react'
 
-import Task from './Task'
-import Form from './Form'
+import Task from '../components/Task'
+import Form from '../components/Form'
 
-export default function TodayTasks() {
+export default function TodoListPage() {
   const [tasks, setTasks] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/collection/today')
+    fetch('http://localhost:5000/api/lists/8/tasks?all=true')
       .then((res) => res.json())
       .then(setTasks)
   }, [])
