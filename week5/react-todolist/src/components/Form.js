@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import styles from '../style/Form.module.css'
 
-export default function Form({ tasks, addTask }) {
+export default function Form({ addTask }) {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [due_date, setDueDate] = useState('')
+
+  const { list_id } = useParams()
 
   function submitHandler(event) {
     event.preventDefault()
 
     if (title.trim()) {
       addTask({
-        id: tasks.length + 1,
         title,
-        done: false,
         due_date,
-        list_id: 1,
+        list_id,
         description,
       })
 

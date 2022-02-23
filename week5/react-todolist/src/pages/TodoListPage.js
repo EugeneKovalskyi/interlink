@@ -7,18 +7,18 @@ import Form from '../components/Form'
 
 export default function TodoListPage() {
   const [tasks, setTasks] = useState([])
-  const { listId } = useParams()
+  const { list_id } = useParams()
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/lists/${listId}/tasks?all=true`)
+      .get(`http://localhost:5000/api/lists/${list_id}/tasks?all=true`)
       .then((res) => setTasks(res.data))
       .catch((error) => console.log(error))
-  }, [listId])
+  }, [list_id])
 
   function toggleTask(id, done) {
     axios
-      .patch(`http://localhost:5000/api/lists/${listId}/tasks/${id}`, {
+      .patch(`http://localhost:5000/api/lists/${list_id}/tasks/${id}`, {
         done: !done,
       })
       .then((res) => {
@@ -44,8 +44,15 @@ export default function TodoListPage() {
   }
 
   function addTask(task) {
-    setTasks(tasks.concat([task]))
+    axios
+      .post(`http://localhost:5000/api/lists/${list_id}/tasks`, task)
+      .then((res) => {
+        setTasks(tasks.concat([res.data]))
+        console.log(res.data)
+      })
+      .catch((error) => console.log(error))
   }
+
   return (
     <div>
       {tasks.length

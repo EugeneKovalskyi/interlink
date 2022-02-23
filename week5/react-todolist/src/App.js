@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route path='today' element={<TodayTasksPage />} />
-          <Route path='lists/:listId' element={<TodoListPage />} />
+          <Route path='lists/:list_id' element={<TodoListPage />} />
         </Route>
       </Routes>
     </>
