@@ -10,8 +10,8 @@ function App() {
     <>
       <Routes>
         <Route path='/' element={<Layout />}>
-          <Route path='/today' element={<TodayTasksPage />} />
-          <Route path='/lists/8/tasks' element={<TodoListPage />} />
+          <Route path='today' element={<TodayTasksPage />} />
+          <Route path='lists/:listId' element={<TodoListPage />} />
         </Route>
       </Routes>
     </>

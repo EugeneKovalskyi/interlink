@@ -1,17 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styles from '../style/List.module.css'
 
 export default function List({ list }) {
   return (
     <div className={styles.wrapper}>
-      <Link
+      <NavLink
         className={styles.link}
         id={`list-${list.id}`}
-        to={`lists/${list.id}/tasks`}
+        to={`lists/${list.id}`}
       >
         {list.title}
-      </Link>
+      </NavLink>
     </div>
   )
 }

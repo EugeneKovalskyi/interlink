@@ -1,5 +1,6 @@
 import React from 'react'
-import styles from '../style/Task.module.css'
+import { Link } from 'react-router-dom'
+import styles from '../style/TodayTask.module.css'
 
 export default function Task({ task, setTask, deleteTask }) {
   const titleClasses = []
@@ -47,7 +48,12 @@ export default function Task({ task, setTask, deleteTask }) {
           Description: {task.description}
         </p>
       )}
-      <p className={descriptionClasses.join(' ')}>List: {task.list_title}</p>
+      <p className={styles.description}>
+        List:{' '}
+        <Link className={styles.link} to={`../lists/${task.list_id}`}>
+          {task.list_title}
+        </Link>
+      </p>
     </div>
   )
 }

@@ -11,3 +11,11 @@ input {
   height: 100%;
   padding: 4rem;
 }
+
+.active {
+  padding: 0.2rem 1rem;
+  color: #09c;
+  text-decoration: none;
+  border: 1px solid #09c;
+  border-radius: 5px;
+}

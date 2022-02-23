@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 
 import Task from '../components/Task'
 import Form from '../components/Form'
 
 export default function TodoListPage() {
   const [tasks, setTasks] = useState([])
+  const { listId } = useParams()
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/lists/8/tasks?all=true')
+    fetch(`http://localhost:5000/api/lists/${listId}/tasks?all=true`)
       .then((res) => res.json())
       .then(setTasks)
-  }, [])
+  }, [listId])
 
   function toggleTask(id) {
     setTasks(

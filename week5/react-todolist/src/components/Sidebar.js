@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styles from '../style/Sidebar.module.css'
 
 import List from './List'
@@ -15,9 +15,9 @@ export default function Sidebar() {
 
   return (
     <div className={styles.sidebar}>
-      <Link className={styles.link} to='/today'>
+      <NavLink className={styles.link} to='/today'>
         Today
-      </Link>
+      </NavLink>
       {lists.map((list) => (
         <List key={list.id} list={list} />
       ))}
