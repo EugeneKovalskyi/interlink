@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 
 import Task from '../components/TodayTask'
 // import Form from '../components/Form'
@@ -7,9 +8,10 @@ export default function TodayTasksPage() {
   const [tasks, setTasks] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/collection/today')
-      .then((res) => res.json())
-      .then(setTasks)
+    axios
+      .get('http://localhost:5000/api/collection/today')
+      .then((res) => setTasks(res.data))
+      .catch(errorHandler)
   }, [])
 
   function toggleTask(id) {
@@ -33,15 +35,21 @@ export default function TodayTasksPage() {
 
   return (
     <div>
-      {tasks.map((task) => (
-        <Task
-          key={task.id}
-          task={task}
-          setTask={toggleTask}
-          deleteTask={deleteTask}
-        />
-      ))}
+      {tasks.length
+        ? tasks.map((task) => (
+            <Task
+              key={task.id}
+              task={task}
+              setTask={toggleTask}
+              deleteTask={deleteTask}
+            />
+          ))
+        : 'No tasks yet...'}
       {/* <Form tasks={tasks} addTask={addTask} /> */}
     </div>
   )
+}
+
+function errorHandler(error) {
+  console.log(error)
 }

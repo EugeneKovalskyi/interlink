@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import axios from 'axios'
 
 import Task from '../components/Task'
 import Form from '../components/Form'
@@ -9,9 +10,9 @@ export default function TodoListPage() {
   const { listId } = useParams()
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/lists/${listId}/tasks?all=true`)
-      .then((res) => res.json())
-      .then(setTasks)
+    axios
+      .get(`http://localhost:5000/api/lists/${listId}/tasks?all=true`)
+      .then((res) => setTasks(res.data))
   }, [listId])
 
   function toggleTask(id) {
@@ -34,14 +35,16 @@ export default function TodoListPage() {
   }
   return (
     <div>
-      {tasks.map((task) => (
-        <Task
-          key={task.id}
-          task={task}
-          setTask={toggleTask}
-          deleteTask={deleteTask}
-        />
-      ))}
+      {tasks.length
+        ? tasks.map((task) => (
+            <Task
+              key={task.id}
+              task={task}
+              setTask={toggleTask}
+              deleteTask={deleteTask}
+            />
+          ))
+        : 'No tasks yet...'}
       <Form tasks={tasks} addTask={addTask} />
     </div>
   )
