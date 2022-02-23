@@ -35,7 +35,7 @@ export default function Task({ task, setTask, deleteTask }) {
           id={`task-${task.id}`}
           type='checkbox'
           checked={task.done}
-          onChange={() => setTask(task.id)}
+          onChange={() => setTask(task.id, task.done)}
         />
         <span className={titleClasses.join(' ')}>{task.title}</span>
       </label>

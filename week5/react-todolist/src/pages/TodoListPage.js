@@ -13,17 +13,25 @@ export default function TodoListPage() {
     axios
       .get(`http://localhost:5000/api/lists/${listId}/tasks?all=true`)
       .then((res) => setTasks(res.data))
+      .catch((error) => console.log(error))
   }, [listId])
 
-  function toggleTask(id) {
-    setTasks(
-      tasks.map((task) => {
-        if (task.id === id) {
-          task.done = !task.done
-        }
-        return task
+  function toggleTask(id, done) {
+    axios
+      .patch(`http://localhost:5000/api/lists/${listId}/tasks/${id}`, {
+        done: !done,
       })
-    )
+      .then((res) => {
+        setTasks(
+          tasks.map((task) => {
+            if (task.id === id) {
+              task.done = !task.done
+            }
+            return task
+          })
+        )
+      })
+      .catch((error) => console.log(error))
   }
 
   function deleteTask(id) {

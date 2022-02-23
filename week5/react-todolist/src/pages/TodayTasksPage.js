@@ -11,18 +11,25 @@ export default function TodayTasksPage() {
     axios
       .get('http://localhost:5000/api/collection/today')
       .then((res) => setTasks(res.data))
-      .catch(errorHandler)
+      .catch((error) => console.log(error))
   }, [])
 
-  function toggleTask(id) {
-    setTasks(
-      tasks.map((task) => {
-        if (task.id === id) {
-          task.done = !task.done
-        }
-        return task
+  function toggleTask(id, done) {
+    axios
+      .patch(`http://localhost:5000/api/lists/*/tasks/${id}`, {
+        done: !done,
       })
-    )
+      .then((res) => {
+        setTasks(
+          tasks.map((task) => {
+            if (task.id === id) {
+              task.done = !task.done
+            }
+            return task
+          })
+        )
+      })
+      .catch((error) => console.log(error))
   }
 
   function deleteTask(id) {
@@ -48,8 +55,4 @@ export default function TodayTasksPage() {
       {/* <Form tasks={tasks} addTask={addTask} /> */}
     </div>
   )
-}
-
-function errorHandler(error) {
-  console.log(error)
 }
