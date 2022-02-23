@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from '../style/Sidebar.module.css'
 
 import List from './List'
@@ -6,9 +7,9 @@ import List from './List'
 export default function Sidebar({ lists }) {
   return (
     <div className={styles.sidebar}>
-      <a className={styles.link} href='/'>
+      <Link className={styles.link} to='/today'>
         Today
-      </a>
+      </Link>
       {lists.map((list) => (
         <List key={list.id} list={list} />
       ))}

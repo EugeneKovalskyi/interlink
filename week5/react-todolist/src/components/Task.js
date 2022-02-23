@@ -9,7 +9,7 @@ export default function Task({ task, setTask, deleteTask }) {
 
   function isOverdue() {
     const currentTime = new Date().getTime()
-    const dueTime = new Date(task.due_date).getTime()
+    const dueTime = new Date(task.due_date).getTime() + 23 * 60 * 60 * 1000
 
     return currentTime > dueTime ? true : false
   }

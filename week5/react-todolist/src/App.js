@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Routes, Route } from 'react-router-dom'
 import styles from './style/App.module.css'
 
 import Sidebar from './components/Sidebar'
@@ -43,7 +44,18 @@ function App() {
   return (
     <div className={styles.app}>
       <Sidebar lists={lists} />
-      <TasksList tasks={tasks} setTask={toggleTask} deleteTask={deleteTask} />
+      <Routes>
+        <Route
+          path='/'
+          element={
+            <TasksList
+              tasks={tasks}
+              setTask={toggleTask}
+              deleteTask={deleteTask}
+            />
+          }
+        />
+      </Routes>
       <Form tasks={tasks} addTask={addTask} />
     </div>
   )

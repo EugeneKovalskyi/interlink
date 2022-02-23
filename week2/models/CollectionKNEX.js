@@ -9,7 +9,8 @@ class CollectionKNEX {
         { list_title: 'lists.title' },
         { task_title: 'tasks.title' },
         'tasks.due_date',
-        'tasks.done'
+        'tasks.done',
+        'tasks.id'
       )
       .where('tasks.due_date', currentDate)
       .where('tasks.done', false)
