@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
 import styles from '../style/Sidebar.module.css'
 
 import List from './List'
@@ -8,9 +9,9 @@ export default function Sidebar() {
   const [lists, setLists] = useState([])
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/lists')
-      .then((res) => res.json())
-      .then(setLists)
+    axios.get('http://localhost:5000/api/dashboard').then((res) => {
+      setLists(res.data.dashboard)
+    })
   }, [])
 
   return (
