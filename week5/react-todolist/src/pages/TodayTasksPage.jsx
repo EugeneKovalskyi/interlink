@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import Task from '../components/TodayTask'
-// import Form from '../components/Form'
 
 export default function TodayTasksPage() {
   const [tasks, setTasks] = useState([])
@@ -41,10 +40,6 @@ export default function TodayTasksPage() {
       .catch((error) => console.log(error))
   }
 
-  // function addTask(task) {
-  //   setTasks(tasks.concat([task]))
-  // }
-
   return (
     <div>
       {tasks.length
@@ -57,7 +52,6 @@ export default function TodayTasksPage() {
             />
           ))
         : 'No tasks yet...'}
-      {/* <Form tasks={tasks} addTask={addTask} /> */}
     </div>
   )
 }

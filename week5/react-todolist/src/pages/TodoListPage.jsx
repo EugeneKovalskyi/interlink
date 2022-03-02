@@ -48,7 +48,6 @@ export default function TodoListPage() {
       .post(`http://localhost:5000/api/lists/${list_id}/tasks`, task)
       .then((res) => {
         setTasks(tasks.concat([res.data]))
-        console.log(res.data)
       })
       .catch((error) => console.log(error))
   }

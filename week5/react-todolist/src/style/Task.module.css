@@ -4,7 +4,8 @@
 
 .delete {
   margin-right: 2rem;
-  padding: 0.3rem 0.5rem;
+  padding: 0 0.4rem 0.1rem 0.4rem;
+  font-size: 1.2rem;
   background-color: #eee;
   box-shadow: 1px 1px 3px #555;
   border: none;

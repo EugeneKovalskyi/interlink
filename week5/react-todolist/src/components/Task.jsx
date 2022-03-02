@@ -27,7 +27,7 @@ export default function Task({ task, setTask, deleteTask }) {
   return (
     <div className={styles.task}>
       <button className={styles.delete} onClick={() => deleteTask(task.id)}>
-        X
+        &times;
       </button>
       <label>
         <input
