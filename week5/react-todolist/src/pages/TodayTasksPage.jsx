@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import Task from '../components/TodayTask'
+import Task from '../components/Task'
 
 export default function TodayTasksPage() {
   const [tasks, setTasks] = useState([])

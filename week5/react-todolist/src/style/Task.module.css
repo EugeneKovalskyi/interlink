@@ -38,6 +38,16 @@
   color: #555;
 }
 
+.link {
+  text-decoration: none;
+  color: #09c;
+}
+
+.link:hover {
+  text-decoration: underline;
+  filter: brightness(130%);
+}
+
 .overdue {
   color: #d00;
   background-color: #ccc;

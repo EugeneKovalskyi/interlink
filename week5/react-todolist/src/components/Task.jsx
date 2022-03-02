@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import styles from '../style/Task.module.css'
 
 export default function Task({ task, setTask, deleteTask }) {
@@ -8,10 +9,16 @@ export default function Task({ task, setTask, deleteTask }) {
   const due_date = new Date(task.due_date).toLocaleDateString('uk-UA')
 
   function isOverdue() {
-    const currentTime = new Date().getTime()
-    const dueTime = new Date(task.due_date).getTime() + 23 * 60 * 60 * 1000
+    const dueDate = new Date(task.due_date)
 
-    return currentTime > dueTime ? true : false
+    let currentDate = new Date()
+    currentDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth(),
+      currentDate.getDate()
+    )
+
+    return currentDate > dueDate ? true : false
   }
 
   if (task.done) {
@@ -37,7 +44,9 @@ export default function Task({ task, setTask, deleteTask }) {
           checked={task.done}
           onChange={() => setTask(task.id, task.done)}
         />
-        <span className={titleClasses.join(' ')}>{task.title}</span>
+        <span className={titleClasses.join(' ')}>
+          {task.title || task.task_title}
+        </span>
       </label>
       {task.due_date && (
         <span className={dateClasses.join(' ')}>Due date: {due_date}</span>
@@ -45,6 +54,14 @@ export default function Task({ task, setTask, deleteTask }) {
       {task.description && (
         <p className={descriptionClasses.join(' ')}>
           Description: {task.description}
+        </p>
+      )}
+      {task.list_title && (
+        <p className={styles.description}>
+          List:{' '}
+          <Link className={styles.link} to={`../lists/${task.list_id}`}>
+            {task.list_title}
+          </Link>
         </p>
       )}
     </div>
